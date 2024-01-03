@@ -1,0 +1,56 @@
+-- Code suggestion menager
+-- menuone: show popup allways
+-- noinsert: insert only when confirmed
+-- noselect: select one from the suggestions
+vim.opt.completeopt = {'menuone', 'noselect', 'noinsert', 'preview'}
+-- shortmess: avoid long messages
+vim.opt.shortmess = vim.opt.shortmess + {c = true}
+
+local cmp = require'cmp'
+cmp.setup({
+-- Config
+-- Mappings
+	mapping = {
+		--S: Shift
+		--C: CTRL
+		--CR: Enter
+		--
+		-- Previous suggestion
+		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+		-- Next suggestion
+		['<Tab>'] = cmp.mapping.select_next_item(),
+		-- Scroll backwards
+		['<C-S-f>'] = cmp.mapping.scroll_docs(-5),
+		-- Scroll forward
+		['<C-f>'] = cmp.mapping.scroll_docs(5),
+		-- Bring completion in
+		['<C-Space>'] = cmp.mapping.complete(),
+		-- Exit suggestion
+		['<C-e>'] = cmp.mapping.close(),
+		-- Confirm selection
+		['<CR>'] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Insert,
+			select = true,
+		})
+	},
+-- vsnip
+	snippet = {
+		expand = function(args)
+			vim.fn["vsnip#anonymous"](args.body)
+		end,
+	},
+-- window borders
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+-- Sources for code suggestion
+	sources = {
+		{name = 'path'},
+		{name = 'nvim_lsp', keyword_length = 3},
+		{name = 'nvim_lsp-signature_help'     },
+		{name = 'nvim_lua', keyword_length = 2},
+		{name = 'buffer',   keyword_length = 2},
+		{name = 'vsnip',    keyword_length = 2},
+	}
+})
