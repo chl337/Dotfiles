@@ -2,3 +2,4 @@
 
 ## Includes
 + Nvim
++ i3
