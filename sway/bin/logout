@@ -1,0 +1,18 @@
+#! /usr/bin/env bashcoinsidence
+
+#Logout with rofi
+option=`echo -e "suspend\nlock screen\nlogout\nreboot\npoweroff\nKill user $USER" | wofi -width 600 -dmenu -p system:`
+case $option in
+	suspend)
+		sudo /usr/bin/systemctl suspend
+		;;
+	reboot)
+		/usr/bin/systemctl reboot
+		;;
+	poweroff)
+		/usr/bin/systemctl poweroff
+		;;
+	'kill user $USER')
+		loginctl kill-user $USER
+		;;
+esac

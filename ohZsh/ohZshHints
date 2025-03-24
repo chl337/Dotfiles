@@ -1,0 +1,32 @@
+# Hints for zsh shell
+
+## Keybindings
+
+### Move Cursor
+
+* Alt + f/b: Prev/Next word
+* Ctrl + a/e: Beginning/End of the command
+* Ctrl + xx: Toggle btw cursor and start of line
+
+### Edit
+
+* Ctrl + x,e: Open command in $EDITOR, can be modifed
+* Ctrl + k: Cut from cursor till end of line
+* Ctrl + w: Cut from cursor till the start of line
+* Ctrl + u: Cut hole line
+* Ctrl + Del/d: Delete Prev/Next word from cursor
+* Ctrl + y: Yank buffered text
+* Ctrl + _: Undo
+* Alt + r: Redo
+
+### Processes
+
+* Ctrl + l: Clean screen
+* Ctrl + c: Signal interrupt
+* Ctrl + d: Exit/logout current shell
+* Ctrl + z: Move job to background
+
+### History
+
+* Ctrl + r: Interactiv histroy search
+* Ctrl + s: Most recent command
