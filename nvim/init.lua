@@ -1,5 +1,5 @@
-vim.g.terminal_emulator="zsh"
--- init.lua
+vim.g.terminal_emulator="/bin/bash"
+--init.lua
 require "keymaps"
 require "lazy-config"
 require "options"
@@ -18,3 +18,5 @@ require "git-config"
 require "whichkey"
 require "diff"
 require "aerial-config"
+require "cscope-config"
+require "ssh-config"

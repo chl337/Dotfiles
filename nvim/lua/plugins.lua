@@ -96,19 +96,19 @@ return {
         lazy = true,
     },
 --  -- Treesitter
-    {
-        "nvim-treesitter/nvim-treesitter",
-        dependencies = { "tadmccorkle/markdown.nvim" },
-        config = function()
-        require("nvim-treesitter.configs").setup({
-                ensure_installed = { "markdown", "markdown_inline", --[[ other parsers you need ]] },
-                markdown = {
-                        enable = true,
-                -- configuration here or nothing for defaults
-                },
-        })
-        end,
-    },
+   -- {
+   --     "nvim-treesitter/nvim-treesitter",
+   --     dependencies = { "tadmccorkle/markdown.nvim" },
+   --    -- config = function()
+   --    -- require("nvim-treesitter.configs").setup({
+   --    --         ensure_installed = { "markdown", "markdown_inline", --[[ other parsers you need ]] },
+   --    --         markdown = {
+   --    --                 enable = true,
+   --    --         -- configuration here or nothing for defaults
+   --    --         },
+   --    -- })
+   --    -- end,
+   -- },
 -- -- Toggle Term
     {
         'akinsho/toggleterm.nvim',
@@ -127,7 +127,8 @@ return {
     },
 -- -- Diff
     {
-        "sindrets/diffview.nvim"
+        "sindrets/diffview.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
     },
     {
       'stevearc/aerial.nvim',
@@ -138,4 +139,38 @@ return {
          "nvim-tree/nvim-web-devicons"
       },
     },
+-- -- cscope
+    {
+        "dhananjaylatkar/cscope_maps.nvim",
+        dependencies = {
+                "nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
+                "ibhagwan/fzf-lua", -- optional [for picker="fzf-lua"]
+                "echasnovski/mini.pick", -- optional [for picker="mini-pick"]
+                "folke/snacks.nvim", -- optional [for picker="snacks"]
+        },
+        opts = {
+        -- USE EMPTY FOR DEFAULT OPTIONS
+        -- DEFAULTS ARE LISTED BELOW
+        },
+    },
+-- -- gutentags
+    {
+      "ludovicchabant/vim-gutentags",
+      init = function()
+        vim.g.gutentags_modules = {"cscope_maps"} -- This is required. Other config is optional
+        vim.g.gutentags_cscope_build_inverted_index_maps = 1
+        vim.g.gutentags_cache_dir = vim.fn.expand("~/code/.gutentags")
+        vim.g.gutentags_file_list_command = "fd -e c -e h"
+        -- vim.g.gutentags_trace = 1
+      end,
+    },
+-- -- ssh
+    {
+        "nosduco/remote-sshfs.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+        opts = {
+        -- Refer to the configuration section below
+        -- or leave empty for defaults
+                },
+        },
 }
