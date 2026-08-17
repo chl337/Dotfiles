@@ -1,26 +1,41 @@
-local configs = require("nvim-treesitter.configs")
-configs.setup {
-  -- Add a language of your choice
-  ensure_installed = {"cpp", "python", "lua", "rust", "c", "vim", "vimdoc", "query",
-                      "bash", "make", "markdown", "markdown_inline"},
-  sync_install = true,
-  highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = { "" }, -- list of language that will be disabled
-    additional_vim_regex_highlighting = true,
+local ok, configs = pcall(require, "nvim-treesitter.configs")
 
-  },
-  indent = { enable = true, disable = { "yaml" } },
-  rainbow = {
-    enable = true,
-    -- disable = { "jsx" }, list of languages you want to disable the plugin for
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    -- colors = {}, -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
-  },
-  markdown = {
-    enable = true, -- must be specified to enable markdown.nvim as a module
-    -- configuration here or nothing for defaults
-  }
-}
+if not ok then
+    vim.notify(
+        "nvim-treesitter not found",
+        vim.log.levels.ERROR
+    )
+    return
+end
+
+configs.setup({
+
+    ensure_installed = {
+        "c",
+        "cpp",
+        "lua",
+        "rust",
+        "python",
+        "bash",
+        "make",
+        "vim",
+        "vimdoc",
+        "query",
+        "markdown",
+        "markdown_inline",
+    },
+
+    sync_install = false,
+
+    auto_install = true,
+
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+
+    indent = {
+        enable = true,
+        disable = { "yaml" },
+    },
+})

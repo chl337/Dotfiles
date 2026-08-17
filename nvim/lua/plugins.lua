@@ -1,176 +1,259 @@
 return {
-  -- Plugins will be added here accordingly.
-  -- Bufferline 
+
+    ---------------------------------------------------------------------------
+    -- Colorscheme
+    ---------------------------------------------------------------------------
     {
-        'akinsho/bufferline.nvim',
-        dependencies = 'nvim-tree/nvim-web-devicons'
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme("tokyonight-night")
+        end,
     },
---  -- Colorescheme
+
+    ---------------------------------------------------------------------------
+    -- Treesitter
+    ---------------------------------------------------------------------------
     {
-        'folke/tokyonight.nvim',
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        lazy = false,
+        config = function()
+            require("nvim-treesitter.config").setup({
+                ensure_installed = {
+                    "c",
+                    "cpp",
+                    "lua",
+                    "rust",
+                    "python",
+                    "bash",
+                    "make",
+                    "vim",
+                    "vimdoc",
+                    "query",
+                    "markdown",
+                    "markdown_inline",
+                },
+                sync_install = false,
+                auto_install = true,
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false,
+                },
+                indent = {
+                    enable = true,
+                    disable = { "yaml" },
+                },
+            })
+        end,
     },
--- -- Hop (Better Navigation)
+    ---------------------------------------------------------------------------
+    -- Bufferline
+    ---------------------------------------------------------------------------
     {
-        'smoka7/hop.nvim',
+        "akinsho/bufferline.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+    },
+
+    ---------------------------------------------------------------------------
+    -- Hop
+    ---------------------------------------------------------------------------
+    {
+        "smoka7/hop.nvim",
         version = "*",
         opts = {},
-        lazy = true,
     },
---  -- Lualine
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' }
-    },
--- -- Language Support
-    {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
-        dependencies = {
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},         -- Required
-            {'hrsh7th/cmp-nvim-lsp'},     -- Required
-            {'hrsh7th/cmp-buffer'},       -- Optional
-            {'hrsh7th/cmp-path'},         -- Optional
-            {'saadparwaiz1/cmp_luasnip'}, -- Optional
-            {'hrsh7th/cmp-nvim-lua'},     -- Optional
+    ---------------------------------------------------------------------------
+    -- Lualine
+    ---------------------------------------------------------------------------
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+    },
+
+    ---------------------------------------------------------------------------
+    -- LSP / Completion
+    ---------------------------------------------------------------------------
+    {
+        "VonHeikemen/lsp-zero.nvim",
+        branch = "v4.x",
+
+        dependencies = {
+
+            -- LSP
+            { "neovim/nvim-lspconfig" },
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
+
+            -- Completion
+            { "hrsh7th/nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "hrsh7th/cmp-buffer" },
+            { "hrsh7th/cmp-path" },
+            { "hrsh7th/cmp-nvim-lua" },
+            { "saadparwaiz1/cmp_luasnip" },
 
             -- Snippets
-            {'L3MON4D3/LuaSnip'},             -- Required
-            {'rafamadriz/friendly-snippets'}, -- Optional
+            { "L3MON4D3/LuaSnip" },
+            { "rafamadriz/friendly-snippets" },
+        },
+    },
 
-            -- Rust
-            {'simrat39/rust-tools.nvim'},     -- Rust LSP
-        }
-    },
-    -- Markdown
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
-    },
+    ---------------------------------------------------------------------------
     -- Rustaceanvim
-        -- TODO: replace rust-tools
-   -- {
-   --     'mrcjkb/rustaceanvim',
-   --     version = '^3', -- Recommended
-   --     ft = { 'rust' },
-   --  },
-      -- File-explorer
+    ---------------------------------------------------------------------------
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^4",
+        ft = { "rust" },
+    },
+
+    ---------------------------------------------------------------------------
+    -- Neo-tree
+    ---------------------------------------------------------------------------
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
+
         dependencies = {
-                "nvim-lua/plenary.nvim",
-                "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-                "MunifTanjim/nui.nvim",
-                -- "3rd/image.nvim", -- Optional image support in preview window: 
-                        -- See `# Preview Mode` for more information
-        }
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
     },
---    -- Telescope (Fuzzy Finder)
+
+    ---------------------------------------------------------------------------
+    -- Telescope
+    ---------------------------------------------------------------------------
     {
-        'nvim-telescope/telescope.nvim',
-        lazy = true,
+        "nvim-telescope/telescope.nvim",
+
         dependencies = {
-            {'nvim-lua/plenary.nvim'},
-        }
-    },
---    -- Alpha (Dashboard)
-    {
-        "goolord/alpha-nvim",
-        lazy = false,
-        dependencies = {
-                {'nvim-tree/nvim-web-devicons'},
-                { 'echasnovski/mini.nvim', version = '*' },
-        }
-    },
-  -- Which-key Extension
-    {
-        "folke/which-key.nvim",
-        lazy = true,
-    },
---  -- Treesitter
-   -- {
-   --     "nvim-treesitter/nvim-treesitter",
-   --     dependencies = { "tadmccorkle/markdown.nvim" },
-   --    -- config = function()
-   --    -- require("nvim-treesitter.configs").setup({
-   --    --         ensure_installed = { "markdown", "markdown_inline", --[[ other parsers you need ]] },
-   --    --         markdown = {
-   --    --                 enable = true,
-   --    --         -- configuration here or nothing for defaults
-   --    --         },
-   --    -- })
-   --    -- end,
-   -- },
--- -- Toggle Term
-    {
-        'akinsho/toggleterm.nvim',
-        config = true
-    },
--- -- Undo Tree
-    {
-        "jiaoshijie/undotree",
-        dependencies  = {
             "nvim-lua/plenary.nvim",
         },
     },
--- -- Git Integration
+
+    ---------------------------------------------------------------------------
+    -- Alpha Dashboard
+    ---------------------------------------------------------------------------
+    {
+        "goolord/alpha-nvim",
+        lazy = false,
+
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            { "echasnovski/mini.nvim", version = "*" },
+        },
+    },
+
+    ---------------------------------------------------------------------------
+    -- Which-key
+    ---------------------------------------------------------------------------
+    {
+        "folke/which-key.nvim",
+    },
+
+    ---------------------------------------------------------------------------
+    -- Toggleterm
+    ---------------------------------------------------------------------------
+    {
+        "akinsho/toggleterm.nvim",
+        config = true,
+    },
+
+    ---------------------------------------------------------------------------
+    -- UndoTree
+    ---------------------------------------------------------------------------
+    {
+        "jiaoshijie/undotree",
+
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+    },
+
+    ---------------------------------------------------------------------------
+    -- Git Signs
+    ---------------------------------------------------------------------------
     {
         "lewis6991/gitsigns.nvim",
     },
--- -- Diff
+
+    ---------------------------------------------------------------------------
+    -- Diffview
+    ---------------------------------------------------------------------------
     {
         "sindrets/diffview.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
+
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
     },
+
+    ---------------------------------------------------------------------------
+    -- Aerial
+    ---------------------------------------------------------------------------
     {
-      'stevearc/aerial.nvim',
-      opts = {},
-      -- Optional dependencies
-      dependencies = {
-         "nvim-treesitter/nvim-treesitter",
-         "nvim-tree/nvim-web-devicons"
-      },
+        "stevearc/aerial.nvim",
+
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+
+        opts = {},
     },
--- -- cscope
+
+    ---------------------------------------------------------------------------
+    -- Cscope
+    ---------------------------------------------------------------------------
     {
         "dhananjaylatkar/cscope_maps.nvim",
+
         dependencies = {
-                "nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-                "ibhagwan/fzf-lua", -- optional [for picker="fzf-lua"]
-                "echasnovski/mini.pick", -- optional [for picker="mini-pick"]
-                "folke/snacks.nvim", -- optional [for picker="snacks"]
+            "nvim-telescope/telescope.nvim",
+            "ibhagwan/fzf-lua",
+            "echasnovski/mini.pick",
+            "folke/snacks.nvim",
         },
-        opts = {
-        -- USE EMPTY FOR DEFAULT OPTIONS
-        -- DEFAULTS ARE LISTED BELOW
-        },
+
+        opts = {},
     },
--- -- gutentags
+
+    ---------------------------------------------------------------------------
+    -- Gutentags
+    ---------------------------------------------------------------------------
     {
-      "ludovicchabant/vim-gutentags",
-      init = function()
-        vim.g.gutentags_modules = {"cscope_maps"} -- This is required. Other config is optional
-        vim.g.gutentags_cscope_build_inverted_index_maps = 1
-        vim.g.gutentags_cache_dir = vim.fn.expand("~/code/.gutentags")
-        vim.g.gutentags_file_list_command = "fd -e c -e h"
-        -- vim.g.gutentags_trace = 1
-      end,
+        "ludovicchabant/vim-gutentags",
+
+        init = function()
+            vim.g.gutentags_modules = { "cscope_maps" }
+            vim.g.gutentags_cscope_build_inverted_index_maps = 1
+            vim.g.gutentags_cache_dir =
+                vim.fn.expand("~/code/.gutentags")
+
+            vim.g.gutentags_file_list_command =
+                "fd -e c -e h"
+        end,
     },
--- -- ssh
+
+    ---------------------------------------------------------------------------
+    -- SSHFS
+    ---------------------------------------------------------------------------
     {
         "nosduco/remote-sshfs.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-        opts = {
-        -- Refer to the configuration section below
-        -- or leave empty for defaults
-                },
+
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim",
         },
+
+        opts = {},
+    },
 }
