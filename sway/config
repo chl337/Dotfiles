@@ -146,6 +146,9 @@ bindsym $mod+x input type:keyboard xkb_switch_layout next
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # Exit sway hard (shutdown)
+    bindsym $mod+Shift+b exec "shutdown now"
 #
 # Moving around:
 #
@@ -294,7 +297,7 @@ bindsym $mod+Shift+v exec vivaldi
 exec_always --no-startup-id nm-applet
 
 # lock
-bindsym $mod+Shift+s exec swaylock --ignore-empty-password --show-failed-attempts
+bindsym $mod+Shift+s exec swaylock --ignore-empty-password --show-failed-attempts -c 000000
 
 #Rules
 for_window [window_role="task_dialog|bubble|page-info|Preferences|pop-up"] floating enable
