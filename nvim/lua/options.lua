@@ -23,7 +23,7 @@ opt.relativenumber = false -- Relative line numbers
 opt.scrolloff = 5 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
-opt.shiftwidth = 8 -- Size of an indent
+opt.shiftwidth = 4 -- Size of an indent
 opt.shortmess:append { W = true, I = true, c = true }
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
