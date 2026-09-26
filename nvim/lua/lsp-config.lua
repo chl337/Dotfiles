@@ -1,11 +1,28 @@
 -- lsp-config.lua
--- Learn the keybindings, see :help lsp-zero-keybindings
--- Learn to configure LSP servers, see :help lsp-zero-api-showcase
-local lsp = require('lsp-zero')
---lsp.preset('recommended')
---lsp.skip_server_setup({'rust_analyzer'})
+-- Rust LSP
+--vim.lsp.enable('rust_analyzer')
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- (Optional) Configure lua language server for neovim
---lsp.nvim_workspace()
+vim.lsp.config("*", {
+  capabilities = capabilities,
+})
 
-lsp.setup()
+vim.lsp.config("clangd", {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+  },
+
+  root_markers = {
+    "compile_commands.json",
+    "compile_flags.txt",
+    ".clangd",
+    ".git",
+  },
+})
+
+vim.lsp.enable({
+  "clangd",
+  "rust_analyzer",
+})

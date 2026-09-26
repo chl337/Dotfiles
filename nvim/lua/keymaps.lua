@@ -72,3 +72,27 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- LSP navigation
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+    desc = "Go to definition",
+})
+
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
+    desc = "Go to declaration",
+})
+
+vim.keymap.set("n", "gr", vim.lsp.buf.references, {
+    desc = "Find references",
+})
+
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {
+    desc = "Go to implementation",
+})
+
+vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {
+    desc = "Go to type definition",
+})
+
+vim.keymap.set("n", "K", vim.lsp.buf.hover, {
+    desc = "Show documentation",
+})

@@ -20,7 +20,7 @@ return {
         build = ":TSUpdate",
         lazy = false,
         config = function()
-            require("nvim-treesitter.config").setup({
+            require("nvim-treesitter").setup({
                 ensure_installed = {
                     "c",
                     "cpp",
@@ -81,28 +81,24 @@ return {
     -- LSP / Completion
     ---------------------------------------------------------------------------
     {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v4.x",
+       -- LSP
+       { "neovim/nvim-lspconfig",
+          branch = "master",
+       },
+       { "williamboman/mason.nvim" },
+       { "williamboman/mason-lspconfig.nvim" },
 
-        dependencies = {
+       -- Completion
+       { "hrsh7th/nvim-cmp" },
+       { "hrsh7th/cmp-nvim-lsp" },
+       { "hrsh7th/cmp-buffer" },
+       { "hrsh7th/cmp-path" },
+       { "hrsh7th/cmp-nvim-lua" },
+       { "saadparwaiz1/cmp_luasnip" },
 
-            -- LSP
-            { "neovim/nvim-lspconfig" },
-            { "williamboman/mason.nvim" },
-            { "williamboman/mason-lspconfig.nvim" },
-
-            -- Completion
-            { "hrsh7th/nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-path" },
-            { "hrsh7th/cmp-nvim-lua" },
-            { "saadparwaiz1/cmp_luasnip" },
-
-            -- Snippets
-            { "L3MON4D3/LuaSnip" },
-            { "rafamadriz/friendly-snippets" },
-        },
+       -- Snippets
+       { "L3MON4D3/LuaSnip" },
+       { "rafamadriz/friendly-snippets" },
     },
 
     ---------------------------------------------------------------------------
@@ -110,7 +106,8 @@ return {
     ---------------------------------------------------------------------------
     {
         "mrcjkb/rustaceanvim",
-        version = "^4",
+        --version = "^4",
+        branch = "master",
         ft = { "rust" },
     },
 
@@ -239,8 +236,8 @@ return {
                 vim.fn.expand("~/code/.gutentags")
 
             vim.g.gutentags_file_list_command =
-                "fd -e c -e h"
-        end,
+            "find . -type f \\( -name '*.c' -o -name '*.h' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' -o -name '*.hh' -o -name '*.hpp' -o -name '*.hxx' \\)"
+    end,
     },
 
     ---------------------------------------------------------------------------

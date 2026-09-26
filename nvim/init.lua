@@ -8,6 +8,7 @@ require "lazy-config"
 -- LSP + Rust
 require "lsp-config"
 require "rustcean-config"
+require "cmp-config"
 
 -- UI / Navigation
 require "alpha-config"
