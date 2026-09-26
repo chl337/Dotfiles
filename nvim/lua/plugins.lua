@@ -256,4 +256,18 @@ return {
 
         opts = {},
     },
+    {
+      "meanderingprogrammer/render-markdown.nvim",
+      ft = { "markdown" },
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      config = function()
+        require("render-markdown").setup({
+          heading = { enabled = true },
+          code = { enabled = true, border = "rounded" },
+          bullet = { enabled = true },
+          quote = { enabled = true },
+        })
+      end,
+    }
+
 }
