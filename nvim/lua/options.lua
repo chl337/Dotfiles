@@ -43,6 +43,8 @@ opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.swapfile = false
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
-opt.wrap = false -- Disable line wrap
+--opt.wrap = false -- Disable line wrap
+opt.wrap = true
+opt.linebreak = true
 
 --vim.cmd[[colorscheme tokyonight-night]]
